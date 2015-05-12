@@ -83,4 +83,20 @@ for x in arrloop{
 for (index, x) in enumerate(arrloop){
     arrloop
 }
+/////////////////////////////////////////////////////
+
+var number = 5
+var isPrime = true
+
+for var i = 2; i < number; i++
+{
+    if (number % i == 0){
+        isPrime = false
+        
+    }
+    
+
+}
+
+println(isPrime)
 
