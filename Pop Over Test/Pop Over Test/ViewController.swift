@@ -15,36 +15,53 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     
     
     @IBAction func selectView(sender: AnyObject) {
-        let picker:UIPickerView = UIPickerView(frame: CGRectZero)
+        //let picker:UIPickerView = UIPickerView(frame: CGRectMake(countryButton.frame.origin.x, countryButton.frame.origin.y, 250,300))
+        
+        var viewControl = UIViewController(nibName: nil, bundle: nil)
+        var myView = UIView(frame: CGRectMake(0, 0, 250, 300))
+        //myView.backgroundColor = UIColor.clearColor()
+        viewControl.view = myView
+        
+        let picker:UIPickerView = UIPickerView(frame: CGRectInset(myView.frame, 10, 10))
         picker.delegate = self
         picker.dataSource = self
         picker.showsSelectionIndicator = true
         myPickerView = picker
-        var viewControl = UIViewController(nibName: nil, bundle: nil)
         
-        var myView = UIView(frame: CGRectMake(0, 0, 500, 600))
         myView.addSubview(picker)
-        viewControl.view = myView
+
+        if(UIDevice.currentDevice().userInterfaceIdiom == .Pad)
+        {
+        
         
        // var popoverContent = self.storyboard?.instantiateViewControllerWithIdentifier() as UIViewController
         //var pop2 = UIPopoverController(contentViewController: viewControl)
-        var nav = UINavigationController(rootViewController: viewControl)
-        nav.modalPresentationStyle = UIModalPresentationStyle.Popover
+        //var nav = UINavigationController(rootViewController: viewControl)
+        //nav.modalPresentationStyle = UIModalPresentationStyle.Popover
         //pop2.presentPopoverFromRect(countryButton.frame, inView: view, permittedArrowDirections: UIPopoverArrowDirection.Any, animated: true)
         
         
      //   var nav = UINavigationController(rootViewController: viewControl)
     //    nav.modalPresentationStyle = UIModalPresentationStyle.Popover
-        var popover = nav.popoverPresentationController
+        //var popover = nav.popoverPresentationController
       //  popoverContent.preferredContentSize = CGSizeMake(500, 600)
         let popRect = countryButton.frame
         let aPopover = UIPopoverController(contentViewController: viewControl)
+        aPopover.setPopoverContentSize(CGSizeMake(250, 300), animated: true)
         aPopover.presentPopoverFromRect(popRect, inView: view, permittedArrowDirections: UIPopoverArrowDirection.Any, animated: true)
-        
-        
-        
+        }
+        else if(UIDevice.currentDevice().userInterfaceIdiom == .Phone)
+        {
+            viewControl.preferredContentSize = CGSizeMake(500, 600)
+            
+         viewControl.modalPresentationStyle = UIModalPresentationStyle.Popover
+        self.presentViewController(viewControl, animated: true, completion: nil)
+            
+            
+        }
 
 
+        
     }
 
     @IBOutlet var countryButton: UIButton!
