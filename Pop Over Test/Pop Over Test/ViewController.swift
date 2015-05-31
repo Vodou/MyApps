@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
+class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate, UIPopoverPresentationControllerDelegate {
     
     var myPickerView:UIPickerView = UIPickerView()
     var cityArray = [String]()
@@ -54,8 +54,12 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         {
             viewControl.preferredContentSize = CGSizeMake(500, 600)
             
-         viewControl.modalPresentationStyle = UIModalPresentationStyle.Popover
-        self.presentViewController(viewControl, animated: true, completion: nil)
+            viewControl.modalPresentationStyle = UIModalPresentationStyle.Popover
+            var popover = viewControl.popoverPresentationController! as UIPopoverPresentationController
+            popover.delegate = self
+            popover.sourceView = self.view
+            
+            self.presentViewController(viewControl, animated: true, completion: nil)
             
             
         }
@@ -95,7 +99,9 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
         return 1
     }
-    
+    func adaptivePresentationStyleForPresentationController(controller: UIPresentationController) -> UIModalPresentationStyle {
+        return UIModalPresentationStyle.None
+    }
     
 
 
