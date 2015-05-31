@@ -34,17 +34,6 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         {
         
         
-       // var popoverContent = self.storyboard?.instantiateViewControllerWithIdentifier() as UIViewController
-        //var pop2 = UIPopoverController(contentViewController: viewControl)
-        //var nav = UINavigationController(rootViewController: viewControl)
-        //nav.modalPresentationStyle = UIModalPresentationStyle.Popover
-        //pop2.presentPopoverFromRect(countryButton.frame, inView: view, permittedArrowDirections: UIPopoverArrowDirection.Any, animated: true)
-        
-        
-     //   var nav = UINavigationController(rootViewController: viewControl)
-    //    nav.modalPresentationStyle = UIModalPresentationStyle.Popover
-        //var popover = nav.popoverPresentationController
-      //  popoverContent.preferredContentSize = CGSizeMake(500, 600)
         let popRect = countryButton.frame
         let aPopover = UIPopoverController(contentViewController: viewControl)
         aPopover.setPopoverContentSize(CGSizeMake(250, 300), animated: true)
@@ -52,12 +41,14 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         }
         else if(UIDevice.currentDevice().userInterfaceIdiom == .Phone)
         {
-            viewControl.preferredContentSize = CGSizeMake(500, 600)
             
+            viewControl.preferredContentSize = CGSizeMake(200, 300)
             viewControl.modalPresentationStyle = UIModalPresentationStyle.Popover
             var popover = viewControl.popoverPresentationController! as UIPopoverPresentationController
             popover.delegate = self
             popover.sourceView = self.view
+            popover.sourceRect = countryButton.frame
+            
             
             self.presentViewController(viewControl, animated: true, completion: nil)
             
